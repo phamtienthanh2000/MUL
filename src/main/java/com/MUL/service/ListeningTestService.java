@@ -108,4 +108,12 @@ public class ListeningTestService implements com.MUL.service.Service<ListeningTe
         listeningTestRepository.deleteById(id);
 //
     }
+
+    @Override
+    public List<ListeningTest> findByKeyword(String keyword) {
+        String searchKey = "%"+keyword+"%";
+        List<ListeningTest> result = listeningTestRepository.findDistinctByTestTypeLikeOrTestNameLikeOrAudioSourceLike(searchKey,searchKey,searchKey);
+
+        return result;
+    }
 }

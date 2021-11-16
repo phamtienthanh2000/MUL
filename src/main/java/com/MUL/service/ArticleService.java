@@ -42,6 +42,20 @@ public class ArticleService implements com.MUL.service.Service<Article,Long> {
     public void deleteById(Long id) {
         articleRepository.deleteById(id);
     }
+    //search by title
+    // tag , level ,
+    // searchByTitle,tag,level -> tra ve 1 trong 3
+    // tra ve ca 3 entity
+    // input list , ki tu search
+    //
+    // Article[] search by tag (List data, keyword ) -> list
+    //
 
+    public List<Article> findByKeyword(String keyWord){
+        String searchKey = "%"+keyWord+"%";
+        List<Article>  result =  articleRepository.findDistinctByTitleLikeOrTagLikeOrLevelLikeOrDescriptionLike(searchKey,searchKey,searchKey,searchKey);
+
+        return result;
+    }
 
 }

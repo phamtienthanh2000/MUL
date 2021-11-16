@@ -42,5 +42,10 @@ public class ArticleController {
         articleService.deleteById(id);
     }
 
+    @GetMapping(path="/find-by-keyword/{keyword}")
+    public List<Article> findByKeyword(@PathVariable(name="keyword") String keyword){
+       List<Article> result = articleService.findByKeyword(keyword);
+        return result;
+    }
 
 }

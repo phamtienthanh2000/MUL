@@ -9,4 +9,6 @@ public interface  Service<E,T> {
     void update (E entity);
 
     void deleteById(T id);
+    List<E> findByKeyword(String keyword);
+
 }

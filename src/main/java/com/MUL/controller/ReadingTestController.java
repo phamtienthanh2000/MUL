@@ -43,5 +43,10 @@ public class ReadingTestController {
         readingTestService.deleteById(id);
         return "delete successfully !";
     }
+    @GetMapping("/find-by-keyword/{keyword}")
+    public List<ReadingTest> findByKeyword(@PathVariable(name="keyword") String keyword){
+        return readingTestService.findByKeyword(keyword);
+
+    }
 
 }

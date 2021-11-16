@@ -50,6 +50,14 @@ public class ListeningTestController {
 
     }
 
+    @GetMapping(path = "/find-by-keyword/{keyword}")
+    public List<ListeningTest> findByKeyword(@PathVariable(name="keyword") String keyword){
+
+        List<ListeningTest> result = listeningTestService.findByKeyword(keyword);
+        return result;
+
+    }
+
 
 
 }

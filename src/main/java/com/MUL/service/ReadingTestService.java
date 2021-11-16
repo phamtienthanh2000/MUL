@@ -80,4 +80,15 @@ public class ReadingTestService implements com.MUL.service.Service<ReadingTest,L
         readingTestRepository.deleteById(id);
 
     }
+
+    @Override
+    public List<ReadingTest> findByKeyword(String keyword) {
+        String searchKey = "%"+keyword+"%";
+        System.out.println("searchkey : "+searchKey);
+
+        List<ReadingTest>result = readingTestRepository.findDistinctByTestTypeLikeOrTestNameLikeOrTextThemeLikeOrParagraphLike(searchKey,searchKey,searchKey,searchKey);
+        System.out.println("result : "+result);
+        return result;
+
+    }
 }
