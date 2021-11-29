@@ -1,10 +1,12 @@
 package com.MUL.service;
 
 import com.MUL.entity.Article;
+import com.MUL.entity.Tag;
 import com.MUL.repository.ArticleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,6 +17,10 @@ public class ArticleService implements com.MUL.service.Service<Article,Long> {
 
     @Override
     public void save(Article entity) {
+        for(Tag t : entity.getTag()){
+            t.setArticle(entity);
+        }
+
         articleRepository.save(entity);
         //articleRepository.saveAndFlush();
 
@@ -34,6 +40,11 @@ public class ArticleService implements com.MUL.service.Service<Article,Long> {
 
     @Override
     public void update(Article entity) {
+        Article updateArticle = articleRepository.getById(entity.getId());
+
+        for(Tag t : entity.getTag()){
+            t.setArticle(entity);
+        }
         articleRepository.save(entity);
 
     }
@@ -53,7 +64,22 @@ public class ArticleService implements com.MUL.service.Service<Article,Long> {
 
     public List<Article> findByKeyword(String keyWord){
         String searchKey = "%"+keyWord+"%";
-        List<Article>  result =  articleRepository.findDistinctByTitleLikeOrTagLikeOrLevelLikeOrDescriptionLike(searchKey,searchKey,searchKey,searchKey);
+        List<Article>  search =  articleRepository.findByKeyword(searchKey,searchKey,searchKey,searchKey);
+        List<Article> result = new ArrayList<>();
+        for(Article a : search){
+            boolean duplicate = false;
+            for(Article article : result){
+                if(article.getId() == a.getId()) {
+                    duplicate = true;
+                }
+            }
+            if(!duplicate){
+                result.add(a);
+            }
+
+        }
+
+
 
         return result;
     }

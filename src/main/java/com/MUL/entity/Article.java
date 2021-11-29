@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Data
@@ -23,7 +24,8 @@ public class Article {
     )
     private Long id;
     private String title;
-    private String tag;
+    @OneToMany(mappedBy = "article" ,fetch = FetchType.EAGER,cascade = {CascadeType.PERSIST , CascadeType.MERGE}, orphanRemoval = true)
+    private List<Tag> tag;
     private String level;
     private String description;
     @Column(name = "picture_source")

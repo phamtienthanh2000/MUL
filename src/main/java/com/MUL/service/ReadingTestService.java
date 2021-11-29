@@ -47,6 +47,7 @@ public class ReadingTestService implements com.MUL.service.Service<ReadingTest,L
         ReadingTest updateReadingTest = readingTestRepository.getById(entity.getId());
         updateReadingTest.setTestName(entity.getTestName());
         updateReadingTest.setTestType(entity.getTestType());
+        updateReadingTest.setLevel(entity.getLevel());
         updateReadingTest.setParagraph(entity.getParagraph());
         updateReadingTest.setTextTheme(entity.getTextTheme());
 
@@ -86,7 +87,7 @@ public class ReadingTestService implements com.MUL.service.Service<ReadingTest,L
         String searchKey = "%"+keyword+"%";
         System.out.println("searchkey : "+searchKey);
 
-        List<ReadingTest>result = readingTestRepository.findDistinctByTestTypeLikeOrTestNameLikeOrTextThemeLikeOrParagraphLike(searchKey,searchKey,searchKey,searchKey);
+        List<ReadingTest>result = readingTestRepository.findDistinctByTestTypeLikeOrTestNameLikeOrTextThemeLikeOrParagraphLikeOrLevelLike(searchKey,searchKey,searchKey,searchKey,searchKey);
         System.out.println("result : "+result);
         return result;
 

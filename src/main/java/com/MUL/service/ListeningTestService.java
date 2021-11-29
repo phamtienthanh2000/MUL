@@ -66,6 +66,7 @@ public class ListeningTestService implements com.MUL.service.Service<ListeningTe
         updateTest.setTestType(entity.getTestType());
         updateTest.setTestName(entity.getTestName());
         updateTest.setAudioSource(entity.getAudioSource());
+        updateTest.setLevel(entity.getLevel());
         Question updateQuestionData = null;
         Question updateQuestion = null;
         for(int i = 0 ; i <updateTest.getQuestionList().size();i++){
@@ -112,7 +113,7 @@ public class ListeningTestService implements com.MUL.service.Service<ListeningTe
     @Override
     public List<ListeningTest> findByKeyword(String keyword) {
         String searchKey = "%"+keyword+"%";
-        List<ListeningTest> result = listeningTestRepository.findDistinctByTestTypeLikeOrTestNameLikeOrAudioSourceLike(searchKey,searchKey,searchKey);
+        List<ListeningTest> result = listeningTestRepository.findDistinctByTestTypeLikeOrTestNameLikeOrAudioSourceLikeOrLevelLike(searchKey,searchKey,searchKey,searchKey);
 
         return result;
     }

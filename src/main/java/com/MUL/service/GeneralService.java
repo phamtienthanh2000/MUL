@@ -17,7 +17,7 @@ import java.util.List;
 @Service
 public class GeneralService {
     @Autowired
-    ArticleRepository articleRepository ;
+    ArticleService articleService ;
     @Autowired
     ListeningTestRepository listeningTestRepository;
     @Autowired
@@ -27,11 +27,11 @@ public class GeneralService {
     public List<Object> findByKeyword(String keyword){
         String searchKey = "%"+keyword+"%";
         List<Object> result = new ArrayList<>();
-        List<Article> articles = articleRepository.findDistinctByTitleLikeOrTagLikeOrLevelLikeOrDescriptionLike(searchKey,searchKey,searchKey,searchKey);
+        List<Article> articles = articleService.findByKeyword(keyword);
        result.add(articles);
-        List<ReadingTest> readingTests = readingTestRepository.findDistinctByTestTypeLikeOrTestNameLikeOrTextThemeLikeOrParagraphLike(searchKey,searchKey,searchKey,searchKey);
+        List<ReadingTest> readingTests = readingTestRepository.findDistinctByTestTypeLikeOrTestNameLikeOrTextThemeLikeOrParagraphLikeOrLevelLike(searchKey,searchKey,searchKey,searchKey,searchKey);
        result.add(readingTests);
-       List<ListeningTest> listeningTests = listeningTestRepository.findDistinctByTestTypeLikeOrTestNameLikeOrAudioSourceLike(searchKey,searchKey,searchKey);
+       List<ListeningTest> listeningTests = listeningTestRepository.findDistinctByTestTypeLikeOrTestNameLikeOrAudioSourceLikeOrLevelLike(searchKey,searchKey,searchKey,searchKey);
        result.add(listeningTests);
        List<Question> questions = questionRepository.findDistinctByQuestionContentLikeOrExplainationLike(searchKey,searchKey);
        result.add(questions);

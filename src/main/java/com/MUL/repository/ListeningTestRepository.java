@@ -8,7 +8,7 @@ import java.util.List;
 
 @Repository
 public interface ListeningTestRepository extends JpaRepository<ListeningTest,Long> {
-    public List<ListeningTest> findDistinctByTestTypeLikeOrTestNameLikeOrAudioSourceLike(String testType,String testName, String audioSource);
+    public List<ListeningTest> findDistinctByTestTypeLikeOrTestNameLikeOrAudioSourceLikeOrLevelLike(String testType,String testName, String audioSource,String level);
     //public List<ListeningTest> findDistinctByQuestionList.
 
 }

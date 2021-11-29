@@ -31,6 +31,8 @@ public abstract class Test {
     nullable = false
     )
     private String testName;
+    @Column(name="test_level")
+    private String level;
 
     @OneToMany(mappedBy = "test" ,fetch = FetchType.EAGER,cascade = CascadeType.PERSIST, orphanRemoval = true)
     private List<Question> questionList;
